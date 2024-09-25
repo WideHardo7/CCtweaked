@@ -14,7 +14,7 @@ monitor.clear()
 local check=false
 
 function disegnaBottone(check)     
-    os.clear()
+    monitor.clear()
     if check then
         monitor.setBackgroundColor(colors.green)
     else
