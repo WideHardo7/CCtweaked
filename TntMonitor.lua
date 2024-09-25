@@ -14,12 +14,12 @@ monitor.clear()
 local check=false
 
 function disegnaBottone(check)
-    monitor.clearLine()
     if check then
         monitor.setBackgroundColor(colors.green)
     else
         monitor.setBackgroundColor(colors.red)    
     end  
+    monitor.clearLine()
     monitor.setCursorPos(1,1)
     monitor.write("[ TNT DUPER ]")
 end
