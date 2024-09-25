@@ -29,6 +29,6 @@ while true do
     if x>=2 and x<=15 and y=2 then
         check = not check 
         disegnaBottone(check)
-        shell.run(wget("https://github.com/WideHardo7/CCtweaked/blob/main/TNT.lua") ,check)
+        shell.run("wget https://github.com/WideHardo7/CCtweaked/blob/main/TNT.lua" ,check)
     end
 end
