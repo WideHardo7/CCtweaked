@@ -1,6 +1,8 @@
 local args = {...}
 
 local defaultSide="back"
+local monitorDefaultSide="top"
+local monitor=peripheral.wrap(monitorDefaultSide)
 
 if #args == 0 then
     print("Nessun argomento passato.")
@@ -8,7 +10,7 @@ if #args == 0 then
 end
 
 if args[2]==nil then
-    print("Lato Redstone non specificato")
+    print("Lato Redstone non specificato; usando default: back")
     else 
         defaultSide=args[2]
 end
@@ -18,4 +20,5 @@ while args[1] do
     sleep(1)
     redstone.setOutput(defaultSide,false)
     sleep(1)
+    return 
 end
