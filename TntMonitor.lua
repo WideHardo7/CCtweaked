@@ -32,10 +32,12 @@ while true do
         if check == false and fs.exists("TNT.lua") then
             check = not check 
             disegnaBottone(check)    
-            shell.run("TNT.lua check")
+            shell.run("TNT.lua")
         elseif fs.exists("TNT.lua")==false then
             shell.run("wget https://raw.githubusercontent.com/WideHardo7/CCtweaked/refs/heads/main/TNT.lua")
-            shell.run("TNT.lua check")
+            check = not check 
+            disegnaBottone(check) 
+            shell.run("TNT.lua")
         end
     end
 end
