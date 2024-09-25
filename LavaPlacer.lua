@@ -103,7 +103,7 @@ end
 function loopLava(numTherm)
     for i = 1, numTherm do
         redstone.setOutput("back", true)
-        sleep(1)
+        sleep(2)
         redstone.setOutput("back", false)
     end
 end
