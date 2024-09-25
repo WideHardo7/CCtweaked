@@ -1,6 +1,6 @@
 local args= {...}
 
-local defaultSide="up"
+local defaultSide="top"
 
 if #args == 1 then
     defaultSide=args[1] -- Cambio del side se riferito come argomento al lancio
@@ -35,6 +35,7 @@ while true do
             shell.run("TNT",check)
         else
             shell.run("wget https://github.com/WideHardo7/CCtweaked/blob/main/TNT.lua")
+            shell.run("TNT",check)
         end
     end
 end
