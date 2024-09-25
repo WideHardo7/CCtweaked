@@ -4,7 +4,7 @@ if #args == 1 then
     defaultSide=args[1] -- Cambio del side se riferito come argomento al lancio
 end
 
-local monitor=peripheral.wrap(defaultSide)
+local monitor=peripheral.find(defaultSide)
 
 monitor.setTextScale(1)
 monitor.clear()
