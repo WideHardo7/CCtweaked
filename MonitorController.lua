@@ -7,6 +7,7 @@ local running = false
 monitor.setTextScale(0.5)
 monitor.clear()
 
+-- Funzione per disegnare il bottone
 function disegnaBottone(colore)
     if colore then
         monitor.setBackgroundColor(colors.green)
@@ -20,31 +21,39 @@ end
 
 disegnaBottone(colore)
 
--- Funzione per gestire il ciclo Redstone
-function cicloRedstone()
-    while running do
-        redstone.setOutput(redstoneSide, true)
-        sleep(1)
-        redstone.setOutput(redstoneSide, false)
-        sleep(1)
-    end
-end
-
 while true do
+    -- Rilevamento del tocco del monitor
     local evento, lato, x, y = os.pullEvent("monitor_touch")
     if x >= 1 and x <= 15 and y == 1 then
-        -- Cambiamo stato del bottone
+        -- Cambia lo stato del ciclo
+        running = not running
+        -- Cambia il colore del bottone
         colore = not colore
         disegnaBottone(colore)
 
-        -- Invertiamo lo stato del ciclo Redstone
-        running = not running
-
         if running then
-            -- Se running è true, iniziamo il ciclo Redstone in un thread separato
-            parallel.waitForAny(cicloRedstone)
+            -- Se running è vero, avviamo il ciclo Redstone
+            print("Ciclo Redstone iniziato")
+            while running do
+                -- Accensione e spegnimento del Redstone
+                redstone.setOutput(redstoneSide, true)
+                sleep(1)
+                redstone.setOutput(redstoneSide, false)
+                sleep(1)
+
+                -- Verifica se il pulsante è stato toccato nuovamente
+                local evento, lato, x2, y2 = os.pullEvent("monitor_touch")
+                if x2 >= 1 and x2 <= 15 and y2 == 1 then
+                    -- Se toccato di nuovo, interrompi il ciclo
+                    running = false
+                    colore = not colore
+                    disegnaBottone(colore)
+                    redstone.setOutput(redstoneSide, false) -- Spegne il segnale Redstone
+                    print("Ciclo Redstone fermato")
+                end
+            end
         else
-            -- Se running è false, assicuriamoci che il redstone sia spento
+            -- Se running è falso, assicuriamoci che il Redstone sia spento
             redstone.setOutput(redstoneSide, false)
         end
     end
