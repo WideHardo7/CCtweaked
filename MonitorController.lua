@@ -37,7 +37,7 @@ while true do
                 sleep(1)
                 
                 -- Verifichiamo se il pulsante è stato premuto nuovamente
-                local event, side, x2, y2 = os.pullEvent("monitor_touch")
+                local event, side, x2, y2 = os.pullEventRaw("monitor_touch")
                 if x2 >= 1 and x2 <= 15 and y2 == 1 then
                     running = false
                     colore = not colore -- Cambia nuovamente il colore
