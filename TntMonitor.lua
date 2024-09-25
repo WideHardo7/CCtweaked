@@ -1,3 +1,5 @@
+local args= {...}
+
 local defaultSide="up"
 
 if #args == 1 then
