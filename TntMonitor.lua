@@ -14,12 +14,12 @@ monitor.clear()
 local check=false
 
 function disegnaBottone(check)
+    monitor.clearLine()
     if check then
         monitor.setBackgroundColor(colors.green)
     else
         monitor.setBackgroundColor(colors.red)    
-    end
-    monitor.clearLine()
+    end  
     monitor.setCursorPos(2,2)
     monitor.write("[ TNT DUPER ]")
 end
@@ -34,7 +34,7 @@ while true do
         if fs.exists("TNT") then
             shell.run("TNT",check)
         else
-            shell.run("wget https://github.com/WideHardo7/CCtweaked/blob/main/TNT.lua")
+            shell.run("wget https://raw.githubusercontent.com/WideHardo7/CCtweaked/refs/heads/main/TNT.lua")
             shell.run("TNT",check)
         end
     end
