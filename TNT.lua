@@ -14,7 +14,7 @@ while true do
     redstone.setOutput(defaultSide,false)
     sleep(1)
     local evento,lato,x,y = os.pullEvent("monitor_touch")
-    if x>=1 and x<=15 and y==1 then     
+    if evento=="mouse_click"and x>=1 and x<=15 and y==1 then     
         monitor.setBackgroundColor(colors.red)
         monitor.clearLine()
         monitor.setCursorPos(1,1)   
