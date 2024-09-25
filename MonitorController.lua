@@ -1,3 +1,4 @@
+-- MONITOR PER IL DUPING TNT
 local defaultSide = "top"
 local redstoneSide = "back"
 local monitor = peripheral.wrap(defaultSide)
