@@ -8,7 +8,7 @@ end
 
 local monitor=peripheral.wrap(defaultSide)
 
-monitor.setTextScale(1)
+monitor.setTextScale(0.5)
 monitor.clear()
 
 local check=false
@@ -20,15 +20,15 @@ function disegnaBottone(check)
     else
         monitor.setBackgroundColor(colors.red)    
     end  
-    monitor.setCursorPos(2,2)
+    monitor.setCursorPos(1,1)
     monitor.write("[ TNT DUPER ]")
 end
 
 disegnaBottone(check)
 
 while true do 
-    local evento lato,x,y = os.pullEvent("monitor_touch")
-    if x>=2 and x<=15 and y==2 then
+    local evento,lato,x,y = os.pullEvent("monitor_touch")
+    if x>=1 and x<=15 and y==1 then
         check = not check 
         disegnaBottone(check)       
         if fs.exists("TNT") then
