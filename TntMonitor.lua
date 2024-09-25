@@ -28,12 +28,12 @@ disegnaBottone(check)
 
 while true do 
     local evento,lato,x,y = os.pullEvent("monitor_touch")
-    if x>=1 and x<=15 and y==1 then
-        check = not check 
-        disegnaBottone(check)       
-        if fs.exists("TNT.lua") then
+    if x>=1 and x<=15 and y==1 then     
+        if check == false and fs.exists("TNT.lua") then
+            check = not check 
+            disegnaBottone(check)    
             shell.run("TNT.lua check")
-        else
+        elseif fs.exists("TNT.lua")==false then
             shell.run("wget https://raw.githubusercontent.com/WideHardo7/CCtweaked/refs/heads/main/TNT.lua")
             shell.run("TNT.lua check")
         end

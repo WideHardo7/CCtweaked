@@ -20,5 +20,12 @@ while args[1] do
     sleep(1)
     redstone.setOutput(defaultSide,false)
     sleep(1)
-    return 
+    local evento,lato,x,y = os.pullEvent("monitor_touch")
+    if x>=1 and x<=15 and y==1 then     
+        monitor.setBackgroundColor(colors.red)
+        monitor.clearLine()
+        monitor.setCursorPos(1,1)   
+        monitor.write("[ TNT DUPER ]")
+        shell.exit()
+    end
 end
