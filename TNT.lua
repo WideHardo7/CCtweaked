@@ -1,11 +1,13 @@
+local args={...}
+
 local defaultSide="back"
 local monitorDefaultSide="top"
 local monitor=peripheral.wrap(monitorDefaultSide)
 
-if args[2]==nil then
+if args[1]==nil then
     print("Lato Redstone non specificato; usando default: back")
     else 
-        defaultSide=args[2]
+        defaultSide=args[1]
 end
 
 while true do
