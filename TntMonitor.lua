@@ -32,11 +32,11 @@ while true do
     if x>=1 and x<=15 and y==1 then
         check = not check 
         disegnaBottone(check)       
-        if fs.exists("TNT") then
-            shell.run("TNT",check)
+        if fs.exists("TNT.lua") then
+            shell.run("TNT.lua",check)
         else
             shell.run("wget https://raw.githubusercontent.com/WideHardo7/CCtweaked/refs/heads/main/TNT.lua")
-            shell.run("TNT",check)
+            shell.run("TNT.lua",check)
         end
     end
 end
