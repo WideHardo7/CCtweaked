@@ -2,6 +2,7 @@ local defaultSide="top"
 local redstoneSide="back"
 local monitor=peripheral.wrap(defaultSide)
 local colore=false
+local running=false
 
 monitor.setTextScale(0.5)
 monitor.clear()
