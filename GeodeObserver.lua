@@ -9,7 +9,7 @@ while true do
     if newState.name == args[1] then
         print("Matching block detected: " .. newState.name)
         redstone.setOutput("back", true)
-        sleep(1)
+        sleep(0,5)
         redstone.setOutput("back", false)
     else
        print("Block changed but does not match: " .. newState.name)
