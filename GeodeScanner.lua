@@ -17,7 +17,7 @@ while true do
             print("Blocco Trovato: ".. block["name"].. " in  posizione x: ".. block["x"] .. " y: "..block["y"].. " z: "..block["z"] )
             redstonePulse()
         else
-             print("Blocco diverso dal cercato trovato: ".. block["name"])
+             print("Blocco diverso dal cercato trovato: ".. block["name"] .. " in  posizione x: ".. block["x"] .. " y: "..block["y"].. " z: "..block["z"] )
         end
     end
 end
