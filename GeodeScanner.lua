@@ -1,15 +1,12 @@
 -- QUESTO FILE USA L'UNIVERSAL SCANNER DELLA UNLIMITED PERIPHERAL WORKS
 
 local args = {...}
-local scannerSide = "down"
 
-if not peripheral.isPresent(scannerSide) then
-    error("No peripheral found on side: " .. scannerSide)
-end
+-- Trova lo scanner sulla rete
+local scanner = peripheral.find("universal_scanner")
 
-local scanner = peripheral.wrap(scannerSide)
-if peripheral.getType(scannerSide) ~= "universal_scanner" then
-    error("Peripheral on side " .. scannerSide .. " is not a Universal Scanner.")
+if not scanner then
+    error("Scanner universale non trovato sulla rete.")
 end
 
 function redstonePulse()
@@ -19,8 +16,8 @@ function redstonePulse()
 end
 
 while true do
-    local results = scanner.scan("block", 1)
-    for _, block in pairs(results) do
+    local risultati = scanner.scan("block", 1)
+    for _, block in pairs(risultati) do
         if block.name == args[1] then
             print("Blocco Trovato: " .. block.name .. " in posizione x: " .. block.x .. " y: " .. block.y .. " z: " .. block.z)
             redstonePulse()
@@ -28,5 +25,5 @@ while true do
             print("Blocco diverso dal cercato trovato: " .. block.name .. " in posizione x: " .. block.x .. " y: " .. block.y .. " z: " .. block.z)
         end
     end
-    sleep(1) -- Add a small delay to prevent excessive looping
+    sleep(1) -- Aggiungi un piccolo ritardo per evitare cicli eccessivi
 end
