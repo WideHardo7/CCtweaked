@@ -14,7 +14,7 @@ while true do
     local risultati = scanner.scan("block",1)
     for block in risultati do
         if block["name"]==args[1] then
-            print("Blocco Trovato: ".. block["name"])
+            print("Blocco Trovato: ".. block["name"].. " in  posizione x: ".. block["x"] .. " y: "..block["y"].. " z: "..block["z"] )
             redstonePulse()
         else
              print("Blocco diverso dal cercato trovato: ".. block["name"])
