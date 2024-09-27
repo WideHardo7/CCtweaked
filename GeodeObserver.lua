@@ -1,3 +1,5 @@
+-- QUESTO FILE USA IL REMOTE OBSERVER DELLA UNLIMITED PERIPHERAL WORKS
+
 local observer = peripheral.wrap("down")
 local args = {...}
 
