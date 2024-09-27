@@ -10,9 +10,9 @@ if not scanner then
 end
 
 function redstonePulse()
-    redstone.setOutput("back", true)
+    redstone.setOutput("right", true)
     sleep(1)
-    redstone.setOutput("back", false)
+    redstone.setOutput("right", false)
 end
 
 while true do
