@@ -1,3 +1,5 @@
+os.loadAPI("keys")
+
 print("Digitare la quantità di Thermalilies presenti (1-8): ")
 
 local function readWithTimeout(timeout)
