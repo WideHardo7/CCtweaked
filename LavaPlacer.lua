@@ -1,4 +1,3 @@
-
 print("Digitare la quantità di Thermalilies presenti (1-8): ")
 
 local quantita  -- Dichiariamo 'quantita' come variabile locale all'inizio
@@ -45,6 +44,41 @@ function getUserInput()
         end
     end
 end
+
+function loopLava(numTherm)
+    for i = 1, numTherm do
+        redstone.setOutput("back", true)
+        sleep(2)
+        redstone.setOutput("back", false)
+    end
+end
+
+function countdown(seconds)
+    local x, y = term.getCursorPos()
+    for i = seconds, 1, -1 do
+        term.setCursorPos(1, y)
+        term.clearLine()
+        term.write("Prossimo ciclo in " .. i .. " secondi...")
+        sleep(1)
+    end
+    term.setCursorPos(1, y)
+    term.clearLine()
+    term.write("Avvio del prossimo ciclo...")
+    print()
+end
+
+-- Assicurati che l'API 'keys' sia caricata
+if not keys then
+    os.loadAPI("keys")
+end
+
+-- Ciclo principale
+while true do
+    getUserInput()  -- Ottieni il numero di Thermalilies
+    loopLava(quantita)
+    countdown(300)  -- Attesa di 300 secondi con conto alla rovescia
+end
+
 
 function loopLava(numTherm)
     for i = 1, numTherm do
