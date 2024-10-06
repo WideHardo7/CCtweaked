@@ -1,6 +1,7 @@
-os.loadAPI("keys")
 
 print("Digitare la quantità di Thermalilies presenti (1-8): ")
+
+local quantita  -- Dichiariamo 'quantita' come variabile locale all'inizio
 
 local function readWithTimeout(timeout)
     local sInput = ""
@@ -28,20 +29,20 @@ local function readWithTimeout(timeout)
 end
 
 function getUserInput()
-    local quantita = nil
-    local input = readWithTimeout(15)
-    if input then
-        quantita = tonumber(input)
-        if quantita and quantita >= 1 and quantita <= 8 then
-            -- Input valido
+    quantita = nil
+    while quantita == nil do
+        local input = readWithTimeout(15)
+        if input then
+            local num = tonumber(input)
+            if num and num >= 1 and num <= 8 then
+                quantita = num
+            else
+                print("\nValore non valido; inserire un numero tra 1 e 8:")
+            end
         else
-            print("Valore non valido; inserire un numero tra 1 e 8:")
-            quantita = nil
-            getUserInput()  -- Richiama la funzione per ripetere l'input
+            quantita = 1
+            print("Nessun input rilevato entro 15 secondi. Valore predefinito impostato a 1.")
         end
-    else
-        quantita = 1
-        print("Nessun input rilevato entro 15 secondi. Valore predefinito impostato a 1.")
     end
 end
 
@@ -51,6 +52,11 @@ function loopLava(numTherm)
         sleep(2)
         redstone.setOutput("back", false)
     end
+end
+
+-- Assicurati che l'API 'keys' sia caricata
+if not keys then
+    os.loadAPI("keys")
 end
 
 -- Ciclo principale
