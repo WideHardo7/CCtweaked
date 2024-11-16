@@ -60,7 +60,7 @@ local function handleCommands()
         local _, _, channel, _, message = os.pullEvent("modem_message")
         if channel == BROADCAST_CHANNEL and type(message) == "table" then
             if message.type == "toggle" and message.id == COMPUTER_ID then
-                redstone.setOutput("down", message.state)
+                redstone.setOutput("bottom", message.state)
                 print("Stato redstone: " .. (message.state and "ON" or "OFF"))
             end
         end
