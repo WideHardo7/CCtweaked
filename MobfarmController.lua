@@ -4,8 +4,17 @@
 -- Configurazione
 local BROADCAST_CHANNEL = 1
 local REGISTRATION_CHANNEL = 2
-local BUTTON_HEIGHT = 3
+local BUTTON_HEIGHT = 1  -- Ridotto da 3 a 1
 local BUTTON_SPACING = 1
+
+-- Colori per gli stati
+local COLORS = {
+    TEXT = colors.white,
+    BACKGROUND = colors.black,
+    BUTTON_ON = colors.green,
+    BUTTON_OFF = colors.red,
+    TITLE = colors.yellow
+}
 
 -- Inizializza periferiche
 local modem = peripheral.find("modem")
@@ -27,17 +36,39 @@ modem.open(REGISTRATION_CHANNEL)
 -- Tabella per tenere traccia dei computer registrati
 local registeredComputers = {}
 
+-- Funzione per disegnare un bottone
+local function drawButton(name, y, isActive)
+    local width = monitor.getSize()
+    monitor.setCursorPos(1, y)
+    
+    -- Imposta i colori in base allo stato
+    monitor.setBackgroundColor(isActive and COLORS.BUTTON_ON or COLORS.BUTTON_OFF)
+    monitor.setTextColor(COLORS.TEXT)
+    
+    -- Disegna il bottone con padding
+    local buttonText = string.format(" %s %s ", name, isActive and "ON" or "OFF")
+    monitor.write(buttonText)
+    
+    -- Resetta i colori
+    monitor.setBackgroundColor(COLORS.BACKGROUND)
+    monitor.setTextColor(COLORS.TEXT)
+end
+
 -- Funzione per aggiornare l'interfaccia del monitor
 local function updateMonitor()
+    monitor.setBackgroundColor(COLORS.BACKGROUND)
     monitor.clear()
+    
+    -- Titolo
+    monitor.setTextColor(COLORS.TITLE)
     monitor.setCursorPos(1,1)
-    monitor.setTextScale(1)
+    monitor.setTextScale(0.5)  -- Riduce la dimensione del testo
     monitor.write("Sistema Controllo Mob Farm")
     
+    -- Bottoni
     local yPos = 3
     for id, computer in pairs(registeredComputers) do
-        monitor.setCursorPos(1, yPos)
-        monitor.write(string.format("[ %s ]", computer.name))
+        drawButton(computer.name, yPos, computer.state)
         computer.buttonY = yPos
         yPos = yPos + BUTTON_HEIGHT + BUTTON_SPACING
     end
@@ -66,7 +97,6 @@ local function handleRegistration()
                     id = computerId
                 })
             elseif message.type == "heartbeat" then
-                -- Aggiorna timestamp ultimo heartbeat
                 if registeredComputers[message.id] then
                     registeredComputers[message.id].lastSeen = os.epoch("local")
                 end
@@ -88,6 +118,7 @@ local function handleClick()
                     id = id,
                     state = computer.state
                 })
+                updateMonitor()  -- Aggiorna immediatamente l'interfaccia
                 break
             end
         end
@@ -111,4 +142,3 @@ end
 
 -- Avvia tutti i thread
 parallel.waitForAll(handleRegistration, handleClick, cleanupInactiveComputers)
-
